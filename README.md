@@ -68,6 +68,7 @@ $$
 \text{Final Score} = \frac{\text{Binary F1} + \text{Macro F1}}{2}
 $$
 
+<br>
 
 #### 1️⃣ Binary F1
 
@@ -79,13 +80,14 @@ $$
 
 Where:
 
-- **Precision** = \(\frac{\text{True Positives}}{\text{True Positives + False Positives}}\)  
-- **Recall** = \(\frac{\text{True Positives}}{\text{True Positives + False Negatives}}\)  
+- **Precision** = True Positives / (True Positives + False Positives)  
+- **Recall** = True Positives / (True Positives + False Negatives)  
 
 > True Positive = correctly predicted target gesture  
 > False Positive = non-target predicted as target  
 > False Negative = target predicted as non-target  
 
+<br>
 
 #### 2️⃣ Macro F1
 
@@ -102,6 +104,7 @@ Where:
 
 > **Interpretation:** Macro F1 ensures rare gestures are weighted equally with frequent gestures.
 
+<br>
 
 #### 3️⃣ Final Score
 
@@ -111,7 +114,11 @@ $$
 
 > Higher scores indicate better classification performance for both distinguishing target vs non-target and correctly identifying gesture types.
 
+<br>
+
 ---
+
+<br>
 
 ## 🔄 Workflow
 
