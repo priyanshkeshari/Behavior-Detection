@@ -107,12 +107,12 @@ flowchart TD
     end
 
     subgraph THM_Lane[**THM Features**]
-        style THM_Lane fill:#FCF3CF,stroke:#7D6608,stroke-width:1px
+        style THM_Lane fill:#4A235A,stroke:#7D6608,stroke-width:1px,color:#FFFFFF
         C2[Conv1D + BN + ReLU + MaxPool + Dropout]
     end
 
     subgraph TOF_Lane[**TOF Features**]
-        style TOF_Lane fill:#FADBD8,stroke:#78281F,stroke-width:1px
+        style TOF_Lane fill:#78281F,stroke:#78281F,stroke-width:1px,color:#FFFFFF
         C3[Conv1D + BN + ReLU + MaxPool + Dropout]
     end
 
