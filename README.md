@@ -36,6 +36,30 @@ This design combines:
 
 ---
 
+## Features
+The model leverages multi-sensor data collected from a wrist-worn device:
+
+- **IMU (Inertial Measurement Unit):** accelerometer and gyroscope data.
+- **Thermopiles (THM):** thermal readings from multiple sensors.
+- **Time-of-Flight (TOF):** distance and depth measurements.
+
+Preprocessing generates features like:
+
+- Normalized sensor readings
+- Sequence padding for uniform length
+- Feature scaling
+- Label encoding for gestures
+
+Files in this project:
+
+- `feature_cols.npy` — Selected feature columns
+- `gesture_classes.npy` — Gesture class labels
+- `sequence_maxlen.npy` — Maximum sequence length
+- `label_encoder.pkl` — Encodes gesture labels
+- `scaler.pkl` — StandardScaler for normalization
+
+---
+
 ## 📏 Evaluation
 The official competition metric is a **hybrid macro F1 score** that equally weights:
 1. **Binary F1**: Target vs. non-target gestures.  
