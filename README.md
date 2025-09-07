@@ -62,22 +62,57 @@ Files in this project:
 ---
 
 ## 📏 Evaluation
-The official competition metric is a **hybrid macro F1 score** that equally weights:
-1. **Binary F1**: Target vs. non-target gestures.  
-2. **Macro F1**: Across gesture classes, with all non-targets collapsed into one class.  
-
-The final score = **average of Binary F1 and Macro F1**.
+The competition uses a **combined F1 score**, which is the average of Binary F1 and Macro F1:
 
 $$
 \text{Final Score} = \frac{\text{Binary F1} + \text{Macro F1}}{2}
 $$
 
+---
+
+#### 1️⃣ Binary F1
+
+Binary F1 measures how well the model distinguishes **target BFRB-like gestures** from **non-target gestures**:
+
+$$
+\text{Binary F1} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+$$
+
 Where:
 
-- **Binary F1**: F1 score considering whether a gesture is a target BFRB-like gesture or non-target.
-- **Macro F1**: F1 score across all gesture types, with all non-target sequences collapsed into a single `non_target` class.
+- **Precision** = \(\frac{\text{True Positives}}{\text{True Positives + False Positives}}\)  
+- **Recall** = \(\frac{\text{True Positives}}{\text{True Positives + False Negatives}}\)  
 
-👉 **Interpretation:** Higher scores indicate better performance. The metric equally balances overall gesture classification and distinguishing target vs non-target gestures.
+> True Positive = correctly predicted target gesture  
+> False Positive = non-target predicted as target  
+> False Negative = target predicted as non-target  
+
+---
+
+#### 2️⃣ Macro F1
+
+Macro F1 evaluates **gesture-level classification**, treating each class equally:
+
+$$
+\text{Macro F1} = \frac{1}{N} \sum_{i=1}^{N} F1_i
+$$
+
+Where:
+
+- \( F1_i \) = F1 score for gesture class \(i\)  
+- \( N \) = number of gesture classes (all non-target gestures are merged into a single `non_target` class)
+
+> **Interpretation:** Macro F1 ensures rare gestures are weighted equally with frequent gestures.
+
+---
+
+#### 3️⃣ Final Score
+
+$$
+\text{Final Score} = \frac{\text{Binary F1} + \text{Macro F1}}{2}
+$$
+
+> Higher scores indicate better classification performance for both distinguishing target vs non-target and correctly identifying gesture types.
 
 ---
 
