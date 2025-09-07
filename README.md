@@ -69,6 +69,29 @@ The final score = **average of Binary F1 and Macro F1**.
 
 ---
 
+## Workflow
+
+### Data Preprocessing
+1. Load raw sensor data
+2. Normalize and scale features
+3. Encode labels
+4. Save features and metadata (`.npy` and `.pkl` files)
+
+### Training
+1. Use `cmi-model-5-6-1-training-model.ipynb`
+2. Configure model hyperparameters for each branch
+3. Train CMIModel on IMU + THM + TOF or IMU-only data
+4. Save trained weights
+
+### Inference & Submission
+1. Use `cmi-model-5-6-1-submission-inference-model.ipynb`
+2. Load trained model
+3. Prepare test sequences
+4. Generate predictions
+5. Save output to `.parquet` or CSV for submission
+
+---   
+
 ## 🔧 Usage
 
 ### 🔹 Installation
