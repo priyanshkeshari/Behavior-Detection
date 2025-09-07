@@ -68,7 +68,6 @@ $$
 \text{Final Score} = \frac{\text{Binary F1} + \text{Macro F1}}{2}
 $$
 
----
 
 #### 1️⃣ Binary F1
 
@@ -87,7 +86,6 @@ Where:
 > False Positive = non-target predicted as target  
 > False Negative = target predicted as non-target  
 
----
 
 #### 2️⃣ Macro F1
 
@@ -104,7 +102,6 @@ Where:
 
 > **Interpretation:** Macro F1 ensures rare gestures are weighted equally with frequent gestures.
 
----
 
 #### 3️⃣ Final Score
 
