@@ -37,7 +37,7 @@ This design combines:
 
 ---
 
-## Features
+## 🌐 Features
 The model leverages multi-sensor data collected from a wrist-worn device:
 
 - **IMU (Inertial Measurement Unit):** accelerometer and gyroscope data.
@@ -144,7 +144,7 @@ $$
 ---
 <br>
 
-## 📊 Flowchart
+## ➡️ Flowchart
 
 <br>
 
