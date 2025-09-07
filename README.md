@@ -208,6 +208,31 @@ Relevant articles:
 
 ---
 
+## 📊 Results
+
+The model effectively distinguishes BFRB-like gestures from non-target gestures and classifies specific BFRB types.
+
+**Benchmark Performance:**
+
+- **Evaluation Metric:** Average of Binary F1 and Macro F1  
+  - Binary F1: Measures whether the gesture is a target BFRB-like gesture or non-target  
+  - Macro F1: Measures classification across all gesture types (non-target collapsed into `non_target`)  
+  - Final Score = (Binary F1 + Macro F1) / 2
+
+- **Scores:**  
+  - Binary F1: 0.820  
+  - Macro F1: 0.830  
+  - **Final Score:** 0.825
+
+- **Kaggle Leaderboard:** Ranked **359 / 3,178 participants**  
+
+**Notes:**  
+
+- Half of the test set contained only IMU data, while the other half included IMU, thermal (THM), and time-of-flight (TOF) sensor data.  
+- The results demonstrate the model’s strong ability to identify BFRB-like gestures and classify gesture types, making it effective for multi-sensor sequence classification. 🎉
+
+---
+
 ## 🚀 Future Work
 - Explore **self-supervised pretraining** on raw IMU sequences.  
 - Test **larger transformer-based backbones** (e.g., Longformer, Performer) for long sequence modeling.  
