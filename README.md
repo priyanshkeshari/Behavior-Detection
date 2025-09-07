@@ -90,7 +90,35 @@ The final score = **average of Binary F1 and Macro F1**.
 4. Generate predictions
 5. Save output to `.parquet` or CSV for submission
 
----   
+<br>
+
+flowchart TD
+    A[Raw Sensor Data] --> B[Data Preprocessing]
+    B --> C[Feature Extraction]
+    C --> D[Train/Test Split]
+    D --> E[CMIModel Training]
+    E --> F[Model Evaluation]
+    F --> G{Evaluation Metric}
+    G -->|Binary F1 + Macro F1| H[Final Score]
+    E --> I[Save Model Weights]
+    I --> J[Model Download for Inference]
+    J --> K[Inference on Test Data]
+    K --> L[Submission Generation]
+    L --> M[Submit to Kaggle/Competition]
+
+    %% Detailed Data Preprocessing
+    B --> B1[Load IMU, THM, TOF Data]
+    B1 --> B2[Normalize / Scale Features]
+    B2 --> B3[Sequence Padding / Max Length Adjustment]
+
+    %% Feature Extraction branches
+    C --> C1[IMU: ResNetSE Blocks + SE Attention]
+    C --> C2[THM: Conv1D + BN + ReLU + MaxPool]
+    C --> C3[TOF: Conv1D + BN + ReLU + MaxPool]
+    C1 --> D
+    C2 --> D
+    C3 --> D
+---
 
 ## 🔧 Usage
 
