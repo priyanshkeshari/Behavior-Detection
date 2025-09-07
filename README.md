@@ -91,6 +91,7 @@ The final score = **average of Binary F1 and Macro F1**.
 5. Save output to `.parquet` or CSV for submission
 
 <br>
+
 ```mermaid
 flowchart TD
     %% === Raw Data & Preprocessing ===
@@ -104,10 +105,12 @@ flowchart TD
         style IMU_Lane fill:#D6EAF8,stroke:#1B4F72,stroke-width:1px
         C1[ResNetSE Blocks + SE Attention] 
     end
+
     subgraph THM_Lane[**THM Features**]
         style THM_Lane fill:#FCF3CF,stroke:#7D6608,stroke-width:1px
         C2[Conv1D + BN + ReLU + MaxPool]
     end
+
     subgraph TOF_Lane[**TOF Features**]
         style TOF_Lane fill:#FADBD8,stroke:#78281F,stroke-width:1px
         C3[Conv1D + BN + ReLU + MaxPool]
@@ -137,6 +140,8 @@ flowchart TD
 
     %% === Optional Query / Analysis ===
     U[Optional Query / Analysis] --> G
+
+ ```   
   
 ---
 
