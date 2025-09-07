@@ -6,7 +6,7 @@ By successfully disentangling these behaviors, this work supports the design of 
 
 ---
 
-## 📊 Dataset
+## 📂 Dataset
 We used the **CMI Detect Behavior with Sensor Data** competition datasets.  
 Key modalities:
 - **CMI - Detect Behavior with Sensor Data**
@@ -68,9 +68,20 @@ The official competition metric is a **hybrid macro F1 score** that equally weig
 
 The final score = **average of Binary F1 and Macro F1**.
 
+$$
+\text{Final Score} = \frac{\text{Binary F1} + \text{Macro F1}}{2}
+$$
+
+Where:
+
+- **Binary F1**: F1 score considering whether a gesture is a target BFRB-like gesture or non-target.
+- **Macro F1**: F1 score across all gesture types, with all non-target sequences collapsed into a single `non_target` class.
+
+👉 **Interpretation:** Higher scores indicate better performance. The metric equally balances overall gesture classification and distinguishing target vs non-target gestures.
+
 ---
 
-## Workflow
+## 🔄 Workflow
 
 ### Data Preprocessing
 1. Load raw sensor data
@@ -94,7 +105,7 @@ The final score = **average of Binary F1 and Macro F1**.
 ---
 <br>
 
-## Flowchart
+## 📊 Flowchart
 
 <br>
 
