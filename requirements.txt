@@ -1,0 +1,19 @@
+# Core Deep Learning & CUDA ecosystem
+torch>=2.0.1
+transformers>=4.30.0
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.0.0
+polars>=0.20.0
+
+# Scientific & ML utilities
+scipy>=1.11.0
+scikit-learn>=1.2.0
+joblib>=1.2.0
+
+# Progress bar
+tqdm>=4.65.0
+
+# Utility imports
+kagglehub  # internal Kaggle utility package (imported via kaggle kernel)
