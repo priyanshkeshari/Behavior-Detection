@@ -9,8 +9,9 @@ By successfully disentangling these behaviors, this work supports the design of 
 ## 📊 Dataset
 We used the **CMI Detect Behavior with Sensor Data** competition datasets.  
 Key modalities:
+- **CMI - Detect Behavior with Sensor Data**
 - **IMU (Inertial Measurement Unit)**
-- **Thermopiles**
+- **Thermopiles (THM)**
 - **Time-of-Flight (ToF)**
 
 Half of the test set includes only IMU data, while the other half includes all three sensor modalities, enabling evaluation of whether additional sensors justify their cost and complexity.
