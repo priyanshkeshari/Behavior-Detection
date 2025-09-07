@@ -91,7 +91,7 @@ The final score = **average of Binary F1 and Macro F1**.
 5. Save output to `.parquet` or CSV for submission
 
 <br>
-
+```mermaid
 flowchart TD
     A[Raw Sensor Data] --> B[Data Preprocessing]
     B --> C[Feature Extraction]
@@ -118,6 +118,7 @@ flowchart TD
     C1 --> D
     C2 --> D
     C3 --> D
+```    
 ---
 
 ## 🔧 Usage
