@@ -93,32 +93,51 @@ The final score = **average of Binary F1 and Macro F1**.
 <br>
 ```mermaid
 flowchart TD
-    A[Raw Sensor Data] --> B[Data Preprocessing]
-    B --> C[Feature Extraction]
-    C --> D[Train/Test Split]
-    D --> E[CMIModel Training]
-    E --> F[Model Evaluation]
-    F --> G{Evaluation Metric}
-    G -->|Binary F1 + Macro F1| H[Final Score]
+    %% === Raw Data & Preprocessing ===
+    A[**Raw Sensor Data**] --> B[**Data Preprocessing**]
+    B --> B1[Load IMU, THM, TOF Data]
+    B1 --> B2[Normalize / Scale Features]
+    B2 --> B3[Sequence Padding / Max Length Adjustment]
+
+    %% === Parallel Feature Extraction Lanes ===
+    subgraph IMU_Lane[**IMU Features**]
+        style IMU_Lane fill:#D6EAF8,stroke:#1B4F72,stroke-width:1px
+        C1[ResNetSE Blocks + SE Attention] 
+    end
+    subgraph THM_Lane[**THM Features**]
+        style THM_Lane fill:#FCF3CF,stroke:#7D6608,stroke-width:1px
+        C2[Conv1D + BN + ReLU + MaxPool]
+    end
+    subgraph TOF_Lane[**TOF Features**]
+        style TOF_Lane fill:#FADBD8,stroke:#78281F,stroke-width:1px
+        C3[Conv1D + BN + ReLU + MaxPool]
+    end
+
+    B3 --> C1
+    B3 --> C2
+    B3 --> C3
+
+    %% === Merge and Split ===
+    C1 --> D[**Train/Test Split**]
+    C2 --> D
+    C3 --> D
+
+    %% === Model Training & Evaluation ===
+    D --> E[**CMIModel Training**]
+    E --> F[**Model Evaluation**]
+    F --> G{**Evaluation Metric**}
+    G -->|Binary F1 + Macro F1| H[**Final Score**]
+
+    %% === Model Saving & Inference ===
     E --> I[Save Model Weights]
     I --> J[Model Download for Inference]
     J --> K[Inference on Test Data]
     K --> L[Submission Generation]
     L --> M[Submit to Kaggle/Competition]
 
-    %% Detailed Data Preprocessing
-    B --> B1[Load IMU, THM, TOF Data]
-    B1 --> B2[Normalize / Scale Features]
-    B2 --> B3[Sequence Padding / Max Length Adjustment]
-
-    %% Feature Extraction branches
-    C --> C1[IMU: ResNetSE Blocks + SE Attention]
-    C --> C2[THM: Conv1D + BN + ReLU + MaxPool]
-    C --> C3[TOF: Conv1D + BN + ReLU + MaxPool]
-    C1 --> D
-    C2 --> D
-    C3 --> D
-```    
+    %% === Optional Query / Analysis ===
+    U[Optional Query / Analysis] --> G
+  
 ---
 
 ## 🔧 Usage
