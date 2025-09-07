@@ -102,7 +102,7 @@ flowchart TD
 
     %% === Parallel Feature Extraction Lanes ===
     subgraph IMU_Lane[**IMU Features**]
-        style IMU_Lane fill:#D6EAF8,stroke:#1B4F72,stroke-width:1px
+        style IMU_Lane fill:#1B2631,stroke:#1B4F72,stroke-width:1px,color:#FFFFFF
         C1[ResNetSE Blocks + SE Attention + Dropout]
     end
 
