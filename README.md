@@ -94,41 +94,60 @@ The final score = **average of Binary F1 and Macro F1**.
 
 ```mermaid
 flowchart TD
-    A[Raw CSV File] --> B[CMIFeDataset: Load & Init Features]
-    B --> C[Feature Engineering]
-    C --> C1[IMU Features: magnitudes, jerks, rotation angles, angular velocity & distance, gravity removal]
-    C --> C2[ToF Features: per-sensor stats & region aggregation]
-    C --> C3[Thermal Features: raw or aggregated stats]
-    C1 --> D[Handle Missing Data: forward/backward fill, replace remaining NaNs]
+    %% === Raw Data & Preprocessing ===
+    A[**Raw Sensor Data**] --> B[**Data Preprocessing**]
+    B --> B1[Load IMU, THM, TOF Data]
+    B1 --> B2[Normalize / Scale Features]
+    B2 --> B3[Sequence Padding / Max Length Adjustment]
+
+    %% === Parallel Feature Extraction Lanes ===
+    subgraph IMU_Lane[**IMU Features**]
+        style IMU_Lane fill:#D6EAF8,stroke:#1B4F72,stroke-width:1px
+        C1[ResNetSE Blocks + SE Attention + Dropout]
+    end
+
+    subgraph THM_Lane[**THM Features**]
+        style THM_Lane fill:#FCF3CF,stroke:#7D6608,stroke-width:1px
+        C2[Conv1D + BN + ReLU + MaxPool + Dropout]
+    end
+
+    subgraph TOF_Lane[**TOF Features**]
+        style TOF_Lane fill:#FADBD8,stroke:#78281F,stroke-width:1px
+        C3[Conv1D + BN + ReLU + MaxPool + Dropout]
+    end
+
+    B3 --> C1
+    B3 --> C2
+    B3 --> C3
+
+    %% === Fusion & Transformer ===
+    C1 --> D[**Feature Concatenation / Fusion**]
     C2 --> D
     C3 --> D
-    D --> E[Scale & Pad Sequences]
-    E --> F[Encode Labels & Compute Class Weights]
-    F --> G[Store Ready-to-Train Tensors (IMU, THM, ToF)]
-    
-    G --> H[CMIFoldDataset: Cross-Validation Wrapper]
-    H --> H1[StratifiedKFold Splits (n folds)]
-    H --> H2[Store Train/Validation Indices]
-    H1 --> I[Fold 0: Train/Validation Datasets]
-    H1 --> I1[Fold 1: Train/Validation Datasets]
-    H1 --> I2[Fold 2: Train/Validation Datasets]
-    H1 --> I3[Fold n: Train/Validation Datasets]
-    
-    I --> J[DataLoader: batch_size & num_workers]
-    I1 --> J
-    I2 --> J
-    I3 --> J
-    
-    J --> K[CMIModel: Multi-branch Network]
-    K --> K1[IMU Branch: ResNetSE Blocks]
-    K --> K2[THM Branch: Conv1D + Pooling + Dropout]
-    K --> K3[TOF Branch: Conv1D + Pooling + Dropout]
-    K1 --> L[Fusion: Concatenate Features]
-    K2 --> L
-    K3 --> L
-    L --> M[BERT Encoder + CLS Token]
-    M --> N[Classifier: Fully Connected Layers]
-    N --> O[Output: Gesture Predictions]
+
+    D --> E[**Transformer / BERT Encoder**]
+    E --> F[CLS Token Extraction]
+
+    %% === Classifier ===
+    F --> G[**Fully Connected Classifier**]
+    G --> H[**Softmax / Gesture Prediction**]
+
+    %% === Train/Test Split & Evaluation ===
+    B3 --> I[**Train/Test Split / Cross-Validation**]
+    I --> J[**CMIModel Training**]
+    J --> K[**Model Evaluation**]
+    K --> L{**Evaluation Metric**}
+    L -->|Binary F1 + Macro F1| M[**Final Score**]
+
+    %% === Model Saving & Inference ===
+    J --> N[Save Model Weights]
+    N --> O[Model Download for Inference]
+    O --> P[Inference on Test Data]
+    P --> Q[Submission Generation]
+    Q --> R[Submit to Kaggle / Competition]
+
+    %% === Optional Query / Analysis ===
+    U[Optional Query / Analysis] --> L
 
  ```   
   
