@@ -90,10 +90,9 @@ The final score = **average of Binary F1 and Macro F1**.
 4. Generate predictions
 5. Save output to `.parquet` or CSV for submission
 
+---
 <br>
-
 ## Flowchart
-
 <br>
 
 ```mermaid
