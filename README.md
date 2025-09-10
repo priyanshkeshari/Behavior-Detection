@@ -1,4 +1,4 @@
-#CMI - Detect Behavior with Sensor Data
+# CMI - Detect Behavior with Sensor Data
 
 ## 📌 Project Goal
 The goal of this project is to develop a predictive model that distinguishes **BFRB-like (Body-Focused Repetitive Behaviors)** and **non-BFRB-like** activity using data collected from a wrist-worn device.  
